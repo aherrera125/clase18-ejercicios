@@ -1,23 +1,40 @@
-let myArray = [];
-let render = "";
+let tasks = [];
+let taskList = formData2.querySelector("#display");
+const button = document.getElementById("addTask");
 
-const boton = document.getElementById("agregar");
-boton.addEventListener("click", (event) => {
+button.addEventListener("click", (event) => {
   event.preventDefault();
+  taskList.innerHtml = "";
 
-  let nombreTarea = formData2.querySelector("#nombreTarea").value;
+  let taskName = formData2.querySelector("#taskName").value;
+  formData2.querySelector("#taskName").value = "";
 
-  myArray.push(nombreTarea);
-
-  formData2.querySelector("#nombreTarea").value = "";
-
-  formData2.querySelector("#mostrar").innerHTML = `<ul>${renderizar()}</ul>`;
+  const taskObject = {
+    name: taskName,
+    completed: false,
+  };
+  tasks.push(taskObject);
+  renderizar();
 });
 
 function renderizar() {
-  render = "";
-  for (let i = 0; i < myArray.length; i++) {
-    render += `<li>${myArray[i]}</li>`;
-  }
-  return render;
+  taskList.textContent = "";
+  tasks.forEach((task) => {
+    const li = document.createElement("li");
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = task.completed;
+
+    checkbox.addEventListener("change", () => {
+      task.completed = checkbox.checked;
+      renderizar();
+    });
+
+    const span = document.createElement("span");
+    span.textContent = task.name;
+
+    li.appendChild(checkbox);
+    li.appendChild(span);
+    taskList.appendChild(li);
+  });
 }
