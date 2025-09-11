@@ -5,12 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
+  <style>
+    .order {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      padding-left: 20px;
+    }
+  </style>
   <body>
     <form id="formData1">
-      <button type="submit" id="decrementar">-</button>
-      <div id="mostrar"></div>
-      <button type="submit" id="incrementar">+</button>
-      <button type="submit" id="limpiar">limpiar</button>
+      <h1>1. Contador Interactivo</h1>
+      <h2>Crea un contador que permita:</h2>
+      <ul>
+        <li>Incrementar, decrementar y reiniciar el contador</li>
+        <li>Mostrar el valor actual en el DOM</li>
+        <li>
+          Cambiar el color del número a rojo si es negativo y a verde si es
+          positivo
+        </li>
+      </ul>
+      <div class="order">
+        <button type="submit" id="decrementar">-</button>
+        <div id="mostrar"></div>
+        <button type="submit" id="incrementar">+</button>
+        <button type="submit" id="limpiar">limpiar</button>
+      </div>
     </form>
     <script src="../js/ejercicio1.js"></script>
   </body>
