@@ -10,6 +10,28 @@
       <label for="taskName">Ingrese la tarea:</label>
       <input id="taskName" required />
       <button type="submit" id="addTask">Agregar</button>
+      <div>
+        <label
+          ><input id="allTasks" type="radio" name="opcion" value="1" />All
+          tasks</label
+        >
+        <label
+          ><input
+            id="completedTasks"
+            type="radio"
+            name="opcion"
+            value="2"
+          />Completed</label
+        >
+        <label
+          ><input
+            id="pendingTasks"
+            type="radio"
+            name="opcion"
+            value="3"
+          />Pending</label
+        >
+      </div>
       <ul id="display"></ul>
     </form>
     <script src="../js/ejercicio2.js"></script>
