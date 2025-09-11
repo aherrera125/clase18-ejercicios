@@ -1,4 +1,4 @@
-let tasks = [];
+let tasks = JSON.parse(localStorage.getItem("tasksStorage")) || [];
 let taskList = formData2.querySelector("#display");
 const button = document.getElementById("addTask");
 const allTasks = document.getElementById("allTasks");
@@ -7,7 +7,7 @@ const pendingTasks = document.getElementById("pendingTasks");
 
 button.addEventListener("click", (event) => {
   event.preventDefault();
-  taskList.innerHtml = "";
+  taskList.innerHTML = "";
 
   let taskName = formData2.querySelector("#taskName").value;
   formData2.querySelector("#taskName").value = "";
@@ -17,22 +17,26 @@ button.addEventListener("click", (event) => {
     completed: false,
   };
   tasks.push(taskObject);
-  renderizar("all");
+  saveStorage();
+  render("all");
 });
 
 allTasks.addEventListener("change", (e) => {
-  renderizar("all");
+  saveStorage();
+  render("all");
 });
 
 completedTasks.addEventListener("change", (e) => {
-  renderizar("completed");
+  saveStorage();
+  render("completed");
 });
 
 pendingTasks.addEventListener("change", (e) => {
-  renderizar("pending");
+  saveStorage();
+  render("pending");
 });
 
-function renderizar(typeOp) {
+function render(typeOp) {
   taskList.textContent = "";
   switch (typeOp) {
     case "all":
@@ -49,7 +53,8 @@ function renderizar(typeOp) {
 
         chkCompleted.addEventListener("change", () => {
           task.completed = chkCompleted.checked;
-          renderizar("all");
+          saveStorage();
+          render("all");
         });
 
         btnDelete.addEventListener("click", () => {
@@ -57,7 +62,8 @@ function renderizar(typeOp) {
           if (index > -1) {
             tasks.splice(index, 1);
           }
-          renderizar("all");
+          saveStorage();
+          render("all");
         });
 
         const span = document.createElement("span");
@@ -84,7 +90,8 @@ function renderizar(typeOp) {
 
           chkCompleted.addEventListener("change", () => {
             task.completed = chkCompleted.checked;
-            renderizar("all");
+            saveStorage();
+            render("all");
           });
 
           btnDelete.addEventListener("click", () => {
@@ -92,7 +99,8 @@ function renderizar(typeOp) {
             if (index > -1) {
               tasks.splice(index, 1);
             }
-            renderizar("all");
+            saveStorage();
+            render("all");
           });
 
           const span = document.createElement("span");
@@ -120,7 +128,8 @@ function renderizar(typeOp) {
 
           chkCompleted.addEventListener("change", () => {
             task.completed = chkCompleted.checked;
-            renderizar("all");
+            saveStorage();
+            render("all");
           });
 
           btnDelete.addEventListener("click", () => {
@@ -128,7 +137,8 @@ function renderizar(typeOp) {
             if (index > -1) {
               tasks.splice(index, 1);
             }
-            renderizar("all");
+            saveStorage();
+            render("all");
           });
 
           const span = document.createElement("span");
@@ -143,3 +153,9 @@ function renderizar(typeOp) {
       break;
   }
 }
+
+function saveStorage() {
+  localStorage.setItem("tasksStorage", JSON.stringify(tasks));
+}
+
+render("all");
