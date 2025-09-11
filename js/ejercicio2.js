@@ -21,19 +21,33 @@ function renderizar() {
   taskList.textContent = "";
   tasks.forEach((task) => {
     const li = document.createElement("li");
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.checked = task.completed;
 
-    checkbox.addEventListener("change", () => {
-      task.completed = checkbox.checked;
+    const chkCompleted = document.createElement("input");
+    chkCompleted.type = "radio";
+    chkCompleted.style.accentColor = "green";
+    chkCompleted.checked = task.completed;
+
+    const btnDelete = document.createElement("button");
+    btnDelete.textContent = "X";
+
+    chkCompleted.addEventListener("change", () => {
+      task.completed = chkCompleted.checked;
+      renderizar();
+    });
+
+    btnDelete.addEventListener("click", () => {
+      const index = tasks.indexOf(task);
+      if (index > -1) {
+        tasks.splice(index, 1);
+      }
       renderizar();
     });
 
     const span = document.createElement("span");
     span.textContent = task.name;
 
-    li.appendChild(checkbox);
+    li.appendChild(chkCompleted);
+    li.appendChild(btnDelete);
     li.appendChild(span);
     taskList.appendChild(li);
   });
